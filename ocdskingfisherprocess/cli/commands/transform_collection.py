@@ -17,5 +17,5 @@ class TransformCollectionCLICommand(ocdskingfisherprocess.cli.commands.base.CLIC
             print("That collection does not have any transforms!")
             quit(-1)
 
-        transform = get_transform_instance(self.collection.transform_type, self.config, self.database, self.collection)
+        transform = get_transform_instance(self.collection.transform_type, self.collection.store_end_at is None, self.config, self.database, self.collection)
         transform.process()
