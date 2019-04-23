@@ -3,8 +3,7 @@ import sqlalchemy as sa
 import ocdsmerge
 import datetime
 
-
-class CompileReleasesTransform(BaseTransform):
+class RecordTransform(BaseTransform):
 
     def process(self):
         # Is deleted?
@@ -74,6 +73,9 @@ class CompileReleasesTransform(BaseTransform):
             for row in query:
                 releases.append(self.database.get_data(row['data_id']))
 
-        out = ocdsmerge.merge(releases)
+        compiledRelease = ocdsmerge.merge(releases)
+        versionedRelease = ocdsmerge.merge_versioned(releases)
 
-        self.store.store_file_item(ocid+'.json', None, 'compiled_release', out, 1)
+        out = {'ocid':ocid,'releases':releases,'compiledRelease':compiledRelease,'versionedRelease':versionedRelease}
+
+        self.store.store_file_item(ocid+'.json', None, 'record', out, 1)
