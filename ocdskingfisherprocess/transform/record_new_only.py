@@ -60,17 +60,17 @@ class RecordTransformNewOnly(BaseTransform):
         return ocids
 
     def get_record_data_by_ocid(self,ocids):
-        ocids = None
+        data_id = None
 
         with self.database.get_engine().begin() as engine:
             query = engine.execute(sa.text(
                 " SELECT record.data_id FROM record " +
-                " WHERE record.ocid = " + ocids
-            ), collection_id=self.source_collection.database_id)
+                " WHERE record.ocid = :ocids"
+            ), collection_id=self.source_collection.database_id, ocids=ocids)
 
             for row in query:
-                ocids = row['data_id']
-        return ocids
+                data_id = row['data_id']
+        return data_id
 
     def has_ocid_been_transformed(self, ocid):
 
