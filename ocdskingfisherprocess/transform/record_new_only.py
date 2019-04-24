@@ -90,7 +90,7 @@ class RecordTransformNewOnly(BaseTransform):
 
         with self.database.get_engine().begin() as engine:
             query = engine.execute(sa.text(
-                " SELECT release.* FROM release " +
+                " SELECT DISTINCT release.* FROM release " +
                 " JOIN collection_file_item ON  collection_file_item.id = release.collection_file_item_id " +
                 " JOIN collection_file ON collection_file.id = collection_file_item.collection_file_id  " +
                 " WHERE collection_file.collection_id = :collection_id AND release.ocid = :ocid "
