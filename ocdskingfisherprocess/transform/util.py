@@ -10,8 +10,8 @@ def get_transform_instance(type, isopen, config, database, destination_collectio
         return CompileReleasesTransform(config, database, destination_collection, run_until_timestamp=run_until_timestamp)
     elif type == TRANSFORM_TYPE_UPGRADE_1_0_TO_1_1:
         return Upgrade10To11Transform(config, database, destination_collection, run_until_timestamp=run_until_timestamp)
-    elif type == TRANSFORM_TYPE_RECORD and isopen:
-        return RecordTransform(config, database, destination_collection, run_until_timestamp=run_until_timestamp)
+    #elif type == TRANSFORM_TYPE_RECORD and isopen:
+    #   return RecordTransform(config, database, destination_collection, run_until_timestamp=run_until_timestamp)
     elif type == TRANSFORM_TYPE_RECORD_NEW_ONLY:
         return RecordTransformNewOnly(config, database, destination_collection, run_until_timestamp=run_until_timestamp)
     else:
