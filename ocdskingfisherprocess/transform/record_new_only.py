@@ -109,9 +109,9 @@ class RecordTransformNewOnly(BaseTransform):
         if recordDataId is not None:
             with self.database.get_engine().begin() as engine:
                 query = engine.execute(sa.text(
-                    " UPDATE release " +
+                    " UPDATE data " +
                     " SET data = :data" +
-                    " WHERE release.data_id = :data_id "
+                    " WHERE data_id = :data_id "
                 ), data=json.dumps(out),data_id=recordDataId)
         else:
             self.store.store_file_item(ocid+'.json', None, 'record', out, 1)
