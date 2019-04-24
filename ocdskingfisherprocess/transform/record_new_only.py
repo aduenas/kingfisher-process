@@ -111,7 +111,7 @@ class RecordTransformNewOnly(BaseTransform):
                 query = engine.execute(sa.text(
                     " UPDATE data " +
                     " SET data = :data" +
-                    " WHERE data_id = :data_id "
+                    " WHERE id = :data_id "
                 ), data=json.dumps(out),data_id=recordDataId)
         else:
             self.store.store_file_item(ocid+'.json', None, 'record', out, 1)
