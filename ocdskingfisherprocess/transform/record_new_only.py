@@ -37,8 +37,8 @@ class RecordTransformNewOnly(BaseTransform):
             query = engine.execute(sa.text(
                 " SELECT ocid FROM release_with_collection " +
                 " WHERE collection_id = :collection_id"
-                " GROUP BY ocid" +
-                " HAVING COUNT(release_id) = 1"
+                " GROUP BY ocid, data_id" +
+                " HAVING COUNT(data_id) = 1"
             ), collection_id=self.source_collection.database_id)
 
             for row in query:
